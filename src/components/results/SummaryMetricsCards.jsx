@@ -1,42 +1,42 @@
 import { motion } from 'framer-motion';
 import { DollarSign, Percent, Calendar, ShieldAlert } from 'lucide-react';
 
-const metrics = [
-  {
-    title: 'Monthly PITI Payment',
-    value: '$3,028',
-    subtitle: 'Principal, Interest, Taxes & Ins.',
-    icon: DollarSign,
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-50',
-  },
-  {
-    title: 'Total Loan Amount',
-    value: '$400,000',
-    subtitle: 'Base loan after down payment',
-    icon: Percent,
-    color: 'text-emerald-600',
-    bgColor: 'bg-emerald-50',
-  },
-  {
-    title: 'Payoff Horizon',
-    value: '30 Years',
-    subtitle: 'Standard amortization schedule',
-    icon: Calendar,
-    color: 'text-indigo-600',
-    bgColor: 'bg-indigo-50',
-  },
-  {
-    title: 'Total Interest Payable',
-    value: '$510,120',
-    subtitle: 'Estimated over full term',
-    icon: ShieldAlert,
-    color: 'text-rose-600',
-    bgColor: 'bg-rose-50',
-  },
-];
+export default function SummaryMetricsCards({ results, loanAmount, loanTerm }) {
+  const metrics = [
+    {
+      title: 'Monthly PITI Payment',
+      value: `$${results?.totalMonthlyPayment?.toLocaleString() ?? 0}`,
+      subtitle: 'Principal, Interest, Taxes & Ins.',
+      icon: DollarSign,
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-50',
+    },
+    {
+      title: 'Total Loan Amount',
+      value: `$${loanAmount?.toLocaleString() ?? 0}`,
+      subtitle: 'Base loan after down payment',
+      icon: Percent,
+      color: 'text-emerald-600',
+      bgColor: 'bg-emerald-50',
+    },
+    {
+      title: 'Payoff Horizon',
+      value: `${loanTerm ?? 30} ${(loanTerm ?? 30) === 1 ? 'Year' : 'Years'}`,
+      subtitle: 'Standard amortization schedule',
+      icon: Calendar,
+      color: 'text-indigo-600',
+      bgColor: 'bg-indigo-50',
+    },
+    {
+      title: 'Total Interest Payable',
+      value: `$${results?.totalInterest?.toLocaleString() ?? 0}`,
+      subtitle: 'Estimated over full term',
+      icon: ShieldAlert,
+      color: 'text-rose-600',
+      bgColor: 'bg-rose-50',
+    },
+  ];
 
-export default function SummaryMetricsCards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       {metrics.map((item, idx) => {

@@ -23,24 +23,6 @@ ChartJS.register(
   Legend
 );
 
-const mockData = {
-  labels: Array.from({ length: 30 }, (_, i) => `${i + 1}`),
-  datasets: [
-    {
-      fill: true,
-      label: 'Remaining Balance',
-      data: Array.from({ length: 30 }, (_, i) => 400000 - i * 13000),
-      borderColor: '#3b82f6',
-      backgroundColor: 'rgba(254, 240, 138, 0.4)',
-      borderWidth: 2,
-      pointRadius: 2,
-      pointHoverRadius: 4,
-      pointBackgroundColor: '#2563eb',
-      tension: 0.2,
-    },
-  ],
-};
-
 const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -113,7 +95,26 @@ const options = {
   },
 };
 
-export default function AmortizationChart() {
+export default function AmortizationChart({ yearlyBalances = [] }) {
+  // Map dynamic yearlyBalances to Chart.js format
+  const chartData = {
+    labels: yearlyBalances.map((item) => `${item.year}`),
+    datasets: [
+      {
+        fill: true,
+        label: 'Remaining Balance',
+        data: yearlyBalances.map((item) => item.balance),
+        borderColor: '#3b82f6',
+        backgroundColor: 'rgba(254, 240, 138, 0.4)',
+        borderWidth: 2,
+        pointRadius: 2,
+        pointHoverRadius: 4,
+        pointBackgroundColor: '#2563eb',
+        tension: 0.2,
+      },
+    ],
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, scale: 0.98 }}
@@ -123,7 +124,7 @@ export default function AmortizationChart() {
     >
       <h2 className="text-base font-bold text-slate-900 mb-3">Balance Decay Over Time</h2>
       <div className="h-[260px] w-full">
-        <Line data={mockData} options={options} />
+        <Line data={chartData} options={options} />
       </div>
     </motion.div>
   );

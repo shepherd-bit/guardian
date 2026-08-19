@@ -1,10 +1,7 @@
 import { motion } from 'framer-motion';
 import { PlusCircle, DollarSign } from 'lucide-react';
 
-export default function ExtraPaymentsPanel({ values, onChange }) {
-  const extraMonthly = values?.extraMonthly ?? 0;
-  const extraYearly = values?.extraYearly ?? 0;
-
+export default function ExtraPaymentsPanel({ extraPayment, setExtraPayment }) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 15 }}
@@ -29,27 +26,8 @@ export default function ExtraPaymentsPanel({ values, onChange }) {
             </span>
             <input
               type="number"
-              value={extraMonthly}
-              onChange={(e) => onChange('extraMonthly', Number(e.target.value))}
-              className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border-2 border-blue-300 rounded-lg text-slate-900 font-semibold focus:outline-none focus:border-blue-500"
-              placeholder="0"
-            />
-          </div>
-        </div>
-
-        {/* Extra Yearly Payment */}
-        <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            Extra Yearly Payment ($)
-          </label>
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
-              <PlusCircle className="w-4 h-4" />
-            </span>
-            <input
-              type="number"
-              value={extraYearly}
-              onChange={(e) => onChange('extraYearly', Number(e.target.value))}
+              value={extraPayment}
+              onChange={(e) => setExtraPayment(Number(e.target.value))}
               className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border-2 border-blue-300 rounded-lg text-slate-900 font-semibold focus:outline-none focus:border-blue-500"
               placeholder="0"
             />

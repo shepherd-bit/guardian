@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { DollarSign, Percent, Calendar } from 'lucide-react';
 
 export default function LoanInputForm({ values, onChange }) {
   const rawLoanAmount = values?.loanAmount ?? 400000;
   const [displayValue, setDisplayValue] = useState(rawLoanAmount.toLocaleString());
+
+  // Keep display string synchronized if App state changes from elsewhere
+  useEffect(() => {
+    setDisplayValue(rawLoanAmount.toLocaleString());
+  }, [rawLoanAmount]);
 
   const handleLoanAmountChange = (e) => {
     const rawValue = e.target.value.replace(/,/g, '');
