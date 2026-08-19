@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { DollarSign, Percent, Calendar } from 'lucide-react';
 
 export default function LoanInputForm({ values, onChange }) {
@@ -20,7 +21,12 @@ export default function LoanInputForm({ values, onChange }) {
   };
 
   return (
-    <div className="bg-white rounded-xl border-2 border-blue-300 p-6 shadow-sm">
+    <motion.div 
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="bg-white rounded-xl border-2 border-blue-300 p-6 shadow-sm"
+    >
       <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center justify-between">
         <span>Loan Parameters</span>
         <span className="text-xs font-semibold px-2.5 py-1 bg-slate-100 border border-blue-300 rounded-md text-slate-700">Core Inputs</span>
@@ -89,6 +95,6 @@ export default function LoanInputForm({ values, onChange }) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

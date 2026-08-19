@@ -1,6 +1,13 @@
+import { motion } from 'framer-motion';
+
 export default function Navbar() {
   return (
-    <header className="border-b-2 border-slate-800 bg-white sticky top-0 z-50">
+    <motion.header 
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="border-b-2 border-blue-300 bg-white sticky top-0 z-50 shadow-sm"
+    >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         
         {/* Logo and Branding */}
@@ -17,12 +24,12 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Right Nav Badge with dark distinct border and soft gray shadow */}
-        <div className="flex items-center space-x-2 text-xs font-semibold bg-slate-50 text-slate-900 px-3.5 py-2 rounded-lg border-2 border-slate-800 shadow-sm">
+        {/* Right Nav Badge */}
+        <div className="flex items-center space-x-2 text-xs font-semibold bg-slate-50 text-slate-900 px-3.5 py-2 rounded-lg border-2 border-blue-300 shadow-sm">
           <span>Advanced Mortgage Suite</span>
         </div>
 
       </div>
-    </header>
+    </motion.header>
   );
 }
